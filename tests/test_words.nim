@@ -1,22 +1,23 @@
-import unittest
-import anycase/words
+discard """
+  exitcode: 0
+"""
 
-suite "words":
-  test "plain -> words":
-    check words("change my case") == @["change", "my", "case"]
+import anycase_fork/words
 
-  test "path -> words":
-    check words("change/my/case") == @["change", "my", "case"]
+assert words("change my case") == @["change", "my", "case"]
 
-  test "kebab -> words":
-    check words("change-my-case") == @["change", "my", "case"]
+assert words("change/my/case") == @["change", "my", "case"]
 
-  test "camel -> words":
-    check words("changeMyCase") == @["change", "my", "case"]
+assert words("change-my-case") == @["change", "my", "case"]
 
-  test "pascal -> words":
-    check words("ChangeMyCase") == @["change", "my", "case"]
+assert words("changeMyCase") == @["change", "my", "case"]
 
-  test "snake -> words":
-    check words("change_my_case") == @["change", "my", "case"]
+assert words("ChangeMyCase") == @["change", "my", "case"]
 
+assert words("change_my_case") == @["change", "my", "case"]
+
+assert words("CHANGE-MY-CASE") == @["change", "my", "case"]
+
+assert words("Change-My-Case") == @["change", "my", "case"]
+
+assert words("CHANGE_MY_CASE") == @["change", "my", "case"]

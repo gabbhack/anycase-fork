@@ -1,22 +1,23 @@
-import unittest
-import anycase/pascal
+discard """
+  exitcode: 0
+"""
 
-suite "pascal":
-  test "plain -> pascal":
-    check pascal("change my case") == "ChangeMyCase"
+import anycase_fork
 
-  test "path -> pascal":
-    check pascal("change/my/case") == "ChangeMyCase"
+assert pascal("change my case") == "ChangeMyCase"
 
-  test "kebab -> pascal":
-    check pascal("change-my-case") == "ChangeMyCase"
+assert pascal("change/my/case") == "ChangeMyCase"
 
-  test "camel -> pascal":
-    check pascal("changeMyCase") == "ChangeMyCase"
+assert pascal("change-my-case") == "ChangeMyCase"
 
-  test "pascal -> pascal":
-    check pascal("ChangeMyCase") == "ChangeMyCase"
+assert pascal("changeMyCase") == "ChangeMyCase"
 
-  test "snake -> pascal":
-    check pascal("change_my_case") == "ChangeMyCase"
+assert pascal("ChangeMyCase") == "ChangeMyCase"
 
+assert pascal("change_my_case") == "ChangeMyCase"
+
+assert pascal("CHANGE-MY-CASE") == "ChangeMyCase"
+
+assert pascal("Change-My-Case") == "ChangeMyCase"
+
+assert pascal("CHANGE_MY_CASE") == "ChangeMyCase"

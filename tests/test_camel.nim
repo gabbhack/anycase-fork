@@ -1,22 +1,23 @@
-import unittest
-import anycase/camel
+discard """
+  exitcode: 0
+"""
 
-suite "camel":
-  test "plain -> camel":
-    check camel("change my case") == "changeMyCase"
+import anycase_fork
 
-  test "path -> camel":
-    check camel("change/my/case") == "changeMyCase"
+assert camel("change my case") == "changeMyCase"
 
-  test "kebab -> camel":
-    check camel("change-my-case") == "changeMyCase"
+assert camel("change/my/case") == "changeMyCase"
 
-  test "camel -> camel":
-    check camel("changeMyCase") == "changeMyCase"
+assert camel("change-my-case") == "changeMyCase"
 
-  test "pascal -> camel":
-    check camel("ChangeMyCase") == "changeMyCase"
+assert camel("changeMyCase") == "changeMyCase"
 
-  test "snake -> camel":
-    check camel("change_my_case") == "changeMyCase"
+assert camel("ChangeMyCase") == "changeMyCase"
 
+assert camel("change_my_case") == "changeMyCase"
+
+assert camel("CHANGE-MY-CASE") == "changeMyCase"
+
+assert camel("Change-My-Case") == "changeMyCase"
+
+assert camel("CHANGE_MY_CASE") == "changeMyCase"

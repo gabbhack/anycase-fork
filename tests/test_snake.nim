@@ -1,22 +1,23 @@
-import unittest
-import anycase/snake
+discard """
+  exitcode: 0
+"""
 
-suite "snake":
-  test "plain -> snake":
-    check snake("change my case") == "change_my_case"
+import anycase_fork
 
-  test "path -> snake":
-    check snake("change/my/case") == "change_my_case"
+assert snake("change my case") == "change_my_case"
 
-  test "kebab -> snake":
-    check snake("change-my-case") == "change_my_case"
+assert snake("change/my/case") == "change_my_case"
 
-  test "camel -> snake":
-    check snake("changeMyCase") == "change_my_case"
+assert snake("change-my-case") == "change_my_case"
 
-  test "pascal -> snake":
-    check snake("ChangeMyCase") == "change_my_case"
+assert snake("changeMyCase") == "change_my_case"
 
-  test "snake -> snake":
-    check snake("change_my_case") == "change_my_case"
+assert snake("ChangeMyCase") == "change_my_case"
 
+assert snake("change_my_case") == "change_my_case"
+
+assert snake("CHANGE-MY-CASE") == "change_my_case"
+
+assert snake("Change-My-Case") == "change_my_case"
+
+assert snake("CHANGE_MY_CASE") == "change_my_case"

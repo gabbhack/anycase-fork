@@ -1,22 +1,23 @@
-import unittest
-import anycase/path
+discard """
+  exitcode: 0
+"""
 
-suite "path":
-  test "plain -> path":
-    check path("change my case") == "change/my/case"
+import anycase_fork
 
-  test "path -> path":
-    check path("change/my/case") == "change/my/case"
+assert path("change my case") == "change/my/case"
 
-  test "kebab -> path":
-    check path("change-my-case") == "change/my/case"
+assert path("change/my/case") == "change/my/case"
 
-  test "camel -> path":
-    check path("changeMyCase") == "change/my/case"
+assert path("change-my-case") == "change/my/case"
 
-  test "pascal -> path":
-    check path("ChangeMyCase") == "change/my/case"
+assert path("changeMyCase") == "change/my/case"
 
-  test "snake -> path":
-    check path("change_my_case") == "change/my/case"
+assert path("ChangeMyCase") == "change/my/case"
 
+assert path("change_my_case") == "change/my/case"
+
+assert path("CHANGE-MY-CASE") == "change/my/case"
+
+assert path("Change-My-Case") == "change/my/case"
+
+assert path("CHANGE_MY_CASE") == "change/my/case"

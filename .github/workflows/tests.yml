@@ -1,0 +1,39 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      max-parallel: 6
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        nim: [ '1.0.0', 'stable', 'devel' ]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache nimble
+        id: cache-nimble
+        uses: actions/cache@v1
+        with:
+          path: ~/.nimble
+          key: ${{ runner.os }}-nimble-${{ hashFiles('*.nimble') }}
+        if: runner.os != 'Windows'
+
+      - name: Set up Nim ${{ matrix.nim }} on ${{ matrix.os }}
+        uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ matrix.nim }}
+
+      - name: Install dependencies
+        run: nimble install -d
+      
+      - name: Run check
+        run: nim check src/anycase_fork
+      
+      - name: Run tests
+        run: testament p "./tests/test_*.nim"
