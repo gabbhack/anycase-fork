@@ -28,5 +28,3 @@ doc/*.idx
 bin/*
 
 /*.html
-
-.vscode
