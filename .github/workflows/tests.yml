@@ -30,7 +30,7 @@ jobs:
           nim-version: ${{ matrix.nim }}
 
       - name: Install dependencies
-        run: nimble install -d
+        run: nimble install -d -y
       
       - name: Run check
         run: nim check src/anycase_fork
